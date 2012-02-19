@@ -23,7 +23,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_marginTop="80dp"
 		    android:singleLine="true"
-		    android:text="http://publicstaticdroidmain.com/feed/" />
+		    android:text="http://blainegarrett.com/feed/" />
         
         <Button
             android:id="@+id/btnFetchRSS"
@@ -31,7 +31,7 @@
             android:layout_below="@+id/txtRSSUrl"
             android:background="@drawable/btn_blue"
             android:layout_centerVertical="true"
-            android:text="Save Feed" 
+            android:text="Get News" 
             android:onClick="fetchRSS"/>
         
     </RelativeLayout>

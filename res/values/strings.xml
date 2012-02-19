@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">\nHello World, Skeleton.</string>
+    <string name="hello">Hello World, Skeleton.</string>
     <string name="app_name">News Radar</string>
     <!--  TODO: Fix this isht. -->
 	<integer name="view_transition_duration">500</integer>

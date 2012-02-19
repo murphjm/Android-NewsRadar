@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class SplashActivity extends Activity {
-    private long _splashDelay = 1000;
+    private long _splashDelay = 2000;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -2,6 +2,9 @@ package com.skeletonapp.android;
 
 import com.skeletonapp.rss.RSSFeed;
 import com.skeletonapp.rss.RSSItem;
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.PageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,6 +39,18 @@ public class PagedRSSActivity extends BaseActivity {
         _rssAdapter = new RSSPagerAdapter();
         _viewPager = (ViewPager) findViewById(R.id.viewPager);
         _viewPager.setAdapter(_rssAdapter);
+
+        //Bind the title indicator to the adapter
+        CirclePageIndicator indicator = (CirclePageIndicator)findViewById(R.id.indicator);
+        indicator.setViewPager(_viewPager);
+		
+//		final float density = getResources().getDisplayMetrics().density;
+//		indicator.setBackgroundColor(Color.WHITE);
+//		indicator.setRadius(4 * density);
+//        indicator.setPageColor(0x880000FF);
+//		indicator.setFillColor(Color.BLUE);
+//		indicator.setStrokeColor(Color.BLACK);
+//		indicator.setStrokeWidth((float) (1.5 * density));
     }
     
     private class RSSPagerAdapter extends PagerAdapter {
@@ -62,7 +77,7 @@ public class PagedRSSActivity extends BaseActivity {
         	    RSSItem rssItem = _rssFeed.getItem(position);
         	
                 WebView wv = new WebView(_context);
-                String pagedContent = "<h1>" + rssItem.getTitle() + "</h1>";
+                String pagedContent = "<h2>" + rssItem.getTitle() + "</h2>";
                 pagedContent += rssItem.getContent().replace("%", "&#37;"); //(!rssItem.getContent().equals("")) ? rssItem.getContent() : rssItem.getDescription();
                 wv.loadData(pagedContent, "text/html", "UTF-8");
                 wv.setHorizontalScrollBarEnabled(false);

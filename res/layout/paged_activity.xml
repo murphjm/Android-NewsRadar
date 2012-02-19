@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:app="http://schemas.android.com/apk/res/com.viewpagerindicator.CirclePageIndicator">
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
 	    android:orientation="vertical" 
 	    android:layout_width="fill_parent" 
 	    android:layout_height="wrap_content">
-	    
+	    	    
     <android.support.v4.view.ViewPager
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/viewPager" />
+        android:id="@+id/viewPager"
+        android:layout_below="@+id/indicator" />
+    
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:padding="10dip"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"  />
+	     
     </RelativeLayout>	    
-
-  <com.skeletonapp.android.controls.Header
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      android:id="@+id/header"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent" />
     
 </LinearLayout>
