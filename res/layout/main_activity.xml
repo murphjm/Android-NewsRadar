@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        android:background="#333">
+
+        <com.skeletonapp.android.controls.Header
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+		<EditText
+		    android:id="@+id/txtRSSUrl"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="80dp"
+		    android:singleLine="true"
+		    android:text="http://publicstaticdroidmain.com/feed/" />
+        
+        <Button
+            android:id="@+id/btnFetchRSS"
+            style="@style/ButtonText"
+            android:layout_below="@+id/txtRSSUrl"
+            android:background="@drawable/btn_blue"
+            android:layout_centerVertical="true"
+            android:text="Save Feed" 
+            android:onClick="fetchRSS"/>
+        
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+	<RelativeLayout android:layout_width="fill_parent"
+	 	xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_height="46.67dp" android:background="@drawable/header_background"
+		android:fadingEdge="none">
+		
+		<ImageView android:id="@+id/logoImageView" android:src="@drawable/nav_logo"
+			android:layout_centerHorizontal="true" android:layout_centerVertical="true"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		
+		<TextView android:id="@+id/headerTextView"
+			android:layout_height="wrap_content" 
+			android:layout_centerInParent="true"
+			android:layout_width="wrap_content" 
+			android:textSize="16dp" android:textStyle="bold"
+			android:singleLine="true"
+			android:ellipsize="end"
+			android:layout_marginLeft="3.33dp"
+			android:layout_marginRight="3.33dp"
+			android:textColor="#ffffff"/>
+	</RelativeLayout>
+</merge>
