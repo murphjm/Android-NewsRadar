@@ -12,6 +12,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -64,13 +65,15 @@ public class PagedRSSActivity extends BaseActivity {
                 String pagedContent = "<h1>" + rssItem.getTitle() + "</h1>";
                 pagedContent += rssItem.getContent().replace("%", "&#37;"); //(!rssItem.getContent().equals("")) ? rssItem.getContent() : rssItem.getDescription();
                 wv.loadData(pagedContent, "text/html", "UTF-8");
+                wv.setHorizontalScrollBarEnabled(false);
                 
                 WebSettings webSettings = wv.getSettings();
                 webSettings.setSavePassword(false);
                 webSettings.setSaveFormData(false);
                 webSettings.setJavaScriptEnabled(false);
-                webSettings.setSupportZoom(true);
-                webSettings.setBuiltInZoomControls(true);
+                webSettings.setSupportZoom(false);
+                webSettings.setBuiltInZoomControls(false);
+                webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
                 
                 ((ViewPager) collection).addView((View)wv,0);
                 return wv;
