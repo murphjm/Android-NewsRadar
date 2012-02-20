@@ -1,18 +1,29 @@
 package com.skeletonapp.android;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-import com.skeletonapp.android.controls.Header;
-import com.skeletonapp.rss.RSSFeed;
-import com.skeletonapp.rss.RSSHandler;
+import nl.matshofman.saxrssreader.RssFeed;
+import nl.matshofman.saxrssreader.RssItem;
+import nl.matshofman.saxrssreader.RssReader;
 
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +36,14 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         txtRSSUrl = (EditText) this.findViewById(R.id.txtRSSUrl);
+        
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
+
+        if (Intent.ACTION_VIEW.equals(action)) {
+            String uri = intent.getData().toString();
+            txtRSSUrl.setText(uri);
+        }
     }
     
     @Override
@@ -34,61 +53,39 @@ public class MainActivity extends BaseActivity {
     }
     
     public void fetchRSS(View v) {
-    	showBusyDialog("Fetching News");
-    	new RSSAsyncTask().execute(txtRSSUrl.getText().toString());
-    }
-
-    private RSSFeed getFeed(String urlToRssFeed)
-    {
-    	try
-    	{
-    		// setup the url
-    	   URL url = new URL(urlToRssFeed);
-
-           // create the factory
-           SAXParserFactory factory = SAXParserFactory.newInstance();
-           // create a parser
-           SAXParser parser = factory.newSAXParser();
-
-           // create the reader (scanner)
-           XMLReader xmlreader = parser.getXMLReader();
-           // instantiate our handler
-           RSSHandler theRssHandler = new RSSHandler();
-           // assign our handler
-           xmlreader.setContentHandler(theRssHandler);
-           // get our data via the url class
-           InputSource is = new InputSource(url.openStream());
-           // perform the synchronous parse           
-           xmlreader.parse(is);
-           // get the results - should be a fully populated RSSFeed instance, or null on error
-           return theRssHandler.getFeed();
-    	}
-    	catch (Exception ee)
-    	{
-    		// if we have a problem, simply return null
-    		return null;
-    	}
+    	showBusyDialog("Fetching feed...");
+    	URL url = null;
+		try {
+			url = new URL(txtRSSUrl.getText().toString());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+		}
+		
+    	new RSSAsyncTask().execute(url);
     }
     
-    public class RSSAsyncTask extends AsyncTask<String, Void, RSSFeed> { 
+    public class RSSAsyncTask extends AsyncTask<URL, Void, RssFeed> { 
 
     	@Override
-    	protected RSSFeed doInBackground(String... url) {
-    		// TODO Auto-generated method stub
-    		return getFeed(url[0]);
+    	protected RssFeed doInBackground(URL... url) {
+    		RssFeed feed = null;
+    		try {
+				feed = RssReader.read(url[0]);
+			} catch (SAXException e) {
+				
+			} catch (IOException e) {
+				
+			}
+    		
+    		return feed;
     	}
     	
     	@Override
-        protected void onPostExecute(RSSFeed result) {
-            
-    		// Our long-running process is done, and we can safely access the UI thread
-    		RSSFeed rssFeed = (RSSFeed)result;
-    		String r = rssFeed.getTitle();
-    		
+        protected void onPostExecute(RssFeed result) {
     		if(result != null) {
-                dismissBusyDialog();
+    			dismissBusyDialog();
                 Bundle b = new Bundle();
-                b.putSerializable("rss", rssFeed);
+                b.putSerializable("rss", (Serializable) result);
                 transitionToActivity(PagedRSSActivity.class, b);
     		}
         }

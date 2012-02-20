@@ -5,19 +5,53 @@
 		android:layout_height="46.67dp" android:background="@drawable/header_background"
 		android:fadingEdge="none">
 		
-		<ImageView android:id="@+id/logoImageView" android:src="@drawable/nav_logo"
-			android:layout_centerHorizontal="true" android:layout_centerVertical="true"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		
 		<TextView android:id="@+id/headerTextView"
 			android:layout_height="wrap_content" 
-			android:layout_centerInParent="true"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
 			android:layout_width="wrap_content" 
 			android:textSize="16dp" android:textStyle="bold"
 			android:singleLine="true"
 			android:ellipsize="end"
-			android:layout_marginLeft="3.33dp"
+			android:layout_marginLeft="6dp"
 			android:layout_marginRight="3.33dp"
 			android:textColor="#ffffff"/>
+		
+		<ImageView
+        android:id="@+id/btnAddFeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="12dip" 
+        android:src="@drawable/btn_plus"
+        android:onClick="navigateToAddFeed"/>
+		
+		<View android:layout_height="fill_parent"
+    android:layout_width="2px"
+    android:background="#90909090"
+    android:layout_toLeftOf="@+id/btnAddFeed"
+    android:layout_marginTop="1dip"
+    android:layout_marginBottom="1dip"
+    android:layout_marginRight="12dip"
+    android:id="@+id/seperator1"/>
+		
+				<ImageView
+        android:id="@+id/btnFeedList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/seperator1"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="13dip" 
+        android:src="@drawable/btn_feed"/>
+				
+						<View android:layout_height="fill_parent"
+    android:layout_width="2px"
+    android:background="#90909090"
+    android:layout_toLeftOf="@+id/btnFeedList"
+    android:layout_marginTop="1dip"
+    android:layout_marginBottom="1dip"
+    android:layout_marginRight="12dip"
+    android:id="@+id/seperator2"/>
 	</RelativeLayout>
 </merge>

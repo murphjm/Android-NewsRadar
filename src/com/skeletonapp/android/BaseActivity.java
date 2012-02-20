@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 public class BaseActivity extends Activity implements IBaseView
 {
@@ -44,6 +45,10 @@ public class BaseActivity extends Activity implements IBaseView
 		if(savedInstanceState != null) {
 			restoreInstanceState(savedInstanceState);
 		}
+	}
+	
+	public void navigateToAddFeed(View v) {
+		setHeader("Pressed!");
 	}
 	
 	@Override

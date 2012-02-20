@@ -297,33 +297,44 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int btn_blue=0x7f020000;
-        public static final int header_background=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int logo_cloud=0x7f020003;
-        public static final int nav_bar_gradient=0x7f020004;
-        public static final int nav_logo=0x7f020005;
-        public static final int splash_screen=0x7f020006;
-        public static final int vpi__tab_indicator=0x7f020007;
-        public static final int vpi__tab_selected_focused_holo=0x7f020008;
-        public static final int vpi__tab_selected_holo=0x7f020009;
-        public static final int vpi__tab_selected_pressed_holo=0x7f02000a;
-        public static final int vpi__tab_unselected_focused_holo=0x7f02000b;
-        public static final int vpi__tab_unselected_holo=0x7f02000c;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f02000d;
+        public static final int btn_feed=0x7f020001;
+        public static final int btn_plus=0x7f020002;
+        public static final int feed=0x7f020003;
+        public static final int feed_bak=0x7f020004;
+        public static final int feed_pressed=0x7f020005;
+        public static final int feed_pressed_bak=0x7f020006;
+        public static final int header_background=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int logo_cloud=0x7f020009;
+        public static final int nav_bar_gradient=0x7f02000a;
+        public static final int nav_logo=0x7f02000b;
+        public static final int plus=0x7f02000c;
+        public static final int plus_pressed=0x7f02000d;
+        public static final int splash_screen=0x7f02000e;
+        public static final int vpi__tab_indicator=0x7f02000f;
+        public static final int vpi__tab_selected_focused_holo=0x7f020010;
+        public static final int vpi__tab_selected_holo=0x7f020011;
+        public static final int vpi__tab_selected_pressed_holo=0x7f020012;
+        public static final int vpi__tab_unselected_focused_holo=0x7f020013;
+        public static final int vpi__tab_unselected_holo=0x7f020014;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020015;
     }
     public static final class id {
-        public static final int btnFetchRSS=0x7f050009;
-        public static final int header=0x7f050007;
-        public static final int headerTextView=0x7f050006;
+        public static final int btnAddFeed=0x7f050006;
+        public static final int btnFeedList=0x7f050008;
+        public static final int btnFetchRSS=0x7f05000c;
+        public static final int header=0x7f05000a;
+        public static final int headerTextView=0x7f050005;
         public static final int horizontal=0x7f050000;
-        public static final int indicator=0x7f05000b;
-        public static final int logoImageView=0x7f050005;
+        public static final int indicator=0x7f05000e;
         public static final int none=0x7f050002;
+        public static final int seperator1=0x7f050007;
+        public static final int seperator2=0x7f050009;
         public static final int triangle=0x7f050003;
-        public static final int txtRSSUrl=0x7f050008;
+        public static final int txtRSSUrl=0x7f05000b;
         public static final int underline=0x7f050004;
         public static final int vertical=0x7f050001;
-        public static final int viewPager=0x7f05000a;
+        public static final int viewPager=0x7f05000d;
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f080000;

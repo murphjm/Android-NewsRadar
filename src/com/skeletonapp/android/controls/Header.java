@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class Header extends LinearLayout {
 	private TextView headerTextView;
-	private ImageView logoImageView;
+	// private ImageView logoImageView;
 
 	public Header(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -23,16 +23,16 @@ public class Header extends LinearLayout {
 	@Override
 	public void onFinishInflate() {
 		headerTextView = (TextView) this.findViewById(R.id.headerTextView);
-		logoImageView = (ImageView) this.findViewById(R.id.logoImageView);
+		//logoImageView = (ImageView) this.findViewById(R.id.logoImageView);
 	}
 	
 	public void setHeader(String headerText) {
-		if(!Utilities.isNullOrEmpty(headerText)) {
-			this.logoImageView.setVisibility(View.INVISIBLE);
-		}
-		else {
-			this.logoImageView.setVisibility(View.VISIBLE);
-		}
+//		if(!Utilities.isNullOrEmpty(headerText)) {
+//			this.logoImageView.setVisibility(View.INVISIBLE);
+//		}
+//		else {
+//			this.logoImageView.setVisibility(View.VISIBLE);
+//		}
 		
 		this.headerTextView.setText(headerText);
 	}

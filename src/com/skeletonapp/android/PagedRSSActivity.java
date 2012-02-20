@@ -1,7 +1,13 @@
 package com.skeletonapp.android;
 
-import com.skeletonapp.rss.RSSFeed;
-import com.skeletonapp.rss.RSSItem;
+import java.util.ArrayList;
+
+import nl.matshofman.saxrssreader.RssFeed;
+import nl.matshofman.saxrssreader.RssItem;
+
+import com.skeletonapp.android.util.OperationCallbackBase.DispatchType;
+import com.skeletonapp.android.util.Utilities;
+import com.skeletonapp.android.util.VoidOperationCallback;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -22,8 +28,9 @@ import android.widget.TextView;
 public class PagedRSSActivity extends BaseActivity {
     private ViewPager _viewPager; 
     private Context _context;
-    private RSSPagerAdapter _rssAdapter;
-    private RSSFeed _rssFeed;
+    private RssPagerAdapter _rssAdapter;
+    private RssFeed _rssFeed = null;
+    private ArrayList<RssItem> _rssItems = null;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +41,28 @@ public class PagedRSSActivity extends BaseActivity {
         _context = this;
         
         Bundle b = getIntent().getExtras(); 
-        _rssFeed = (RSSFeed) b.getSerializable("rss");
+        
+        if(b != null) {
+        	_rssFeed = (RssFeed) b.getSerializable("rss");
+        	_rssItems = _rssFeed.getRssItems();
+//        	_rssItems = b.getParcelableArrayList("rss");
+        	VoidOperationCallback adsf = new VoidOperationCallback(DispatchType.MainThread) {
+				
+				@Override
+				protected void onError(Exception error) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				protected void onCompleted() {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+        }
         		
-        _rssAdapter = new RSSPagerAdapter();
+        _rssAdapter = new RssPagerAdapter();
         _viewPager = (ViewPager) findViewById(R.id.viewPager);
         _viewPager.setAdapter(_rssAdapter);
 
@@ -48,17 +74,18 @@ public class PagedRSSActivity extends BaseActivity {
 //		indicator.setBackgroundColor(Color.WHITE);
 //		indicator.setRadius(4 * density);
 //        indicator.setPageColor(0x880000FF);
-//		indicator.setFillColor(Color.BLUE);
+//		indicator.setFillColor(Color.parseColor("#03a6ea"));
 //		indicator.setStrokeColor(Color.BLACK);
 //		indicator.setStrokeWidth((float) (1.5 * density));
     }
     
-    private class RSSPagerAdapter extends PagerAdapter {
+    private class RssPagerAdapter extends PagerAdapter {
 
         
         @Override
         public int getCount() {
-                return _rssFeed.getItemCount();
+        	// TODO: FIX!
+            return _rssFeed.getRssItems().size();
         }
 
     /**
@@ -74,10 +101,10 @@ public class PagedRSSActivity extends BaseActivity {
      */
         @Override
         public Object instantiateItem(View collection, int position) {
-        	    RSSItem rssItem = _rssFeed.getItem(position);
+        	    RssItem rssItem = _rssItems.get(position);
         	
                 WebView wv = new WebView(_context);
-                String pagedContent = "<h2>" + rssItem.getTitle() + "</h2>";
+                String pagedContent = "<h2>" + Utilities.encodeHTML(rssItem.getTitle()) + "</h2>";
                 pagedContent += rssItem.getContent().replace("%", "&#37;"); //(!rssItem.getContent().equals("")) ? rssItem.getContent() : rssItem.getDescription();
                 wv.loadData(pagedContent, "text/html", "UTF-8");
                 wv.setHorizontalScrollBarEnabled(false);
@@ -85,7 +112,7 @@ public class PagedRSSActivity extends BaseActivity {
                 WebSettings webSettings = wv.getSettings();
                 webSettings.setSavePassword(false);
                 webSettings.setSaveFormData(false);
-                webSettings.setJavaScriptEnabled(false);
+                webSettings.setJavaScriptEnabled(true);
                 webSettings.setSupportZoom(false);
                 webSettings.setBuiltInZoomControls(false);
                 webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
