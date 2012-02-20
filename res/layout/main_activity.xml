@@ -16,24 +16,11 @@
             android:id="@+id/header"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-
-		<EditText
-		    android:id="@+id/txtRSSUrl"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_marginTop="80dp"
-		    android:singleLine="true"
-		    android:text="http://blainegarrett.com/feed/" />
         
-        <Button
-            android:id="@+id/btnFetchRSS"
-            style="@style/ButtonText"
-            android:layout_below="@+id/txtRSSUrl"
-            android:background="@drawable/btn_blue"
-            android:layout_centerVertical="true"
-            android:text="Read All About It" 
-            android:onClick="fetchRSS"/>
-        
+		<FrameLayout
+		  android:id="@+id/mainFragement"
+		  android:layout_width="fill_parent"
+		  android:layout_height="fill_parent"/>
     </RelativeLayout>
 
 </LinearLayout>

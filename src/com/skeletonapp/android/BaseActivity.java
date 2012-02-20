@@ -4,6 +4,8 @@ import java.io.File;
 
 import com.flurry.android.FlurryAgent;
 import com.skeletonapp.android.controls.Header;
+import com.skeletonapp.android.fragments.AddFeedFragment;
+import com.skeletonapp.android.fragments.FeedListFragment;
 import com.skeletonapp.android.util.OperationCallback;
 import com.skeletonapp.android.util.Utilities;
 import com.skeletonapp.android.util.VoidOperationCallback;
@@ -14,16 +16,24 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-public class BaseActivity extends Activity implements IBaseView
+public class BaseActivity extends FragmentActivity implements IBaseView
 {
 	private Header _header;
 	private ProgressDialog _busyDialog;
 	private AlertDialog _alertDialog;
+	private FragmentTransaction _fragmentTransaction;
+
+	private Fragment _listFeedsFragment;
+	private Fragment _addFeedFragment;
 	
 	protected boolean isBusyDialogVisible, isNotifyUserVisible, isDisplayErrorVisible;
 	private String busyDialogMessage, notifyUserTitle, notifyUserMessage;
@@ -45,6 +55,9 @@ public class BaseActivity extends Activity implements IBaseView
 		if(savedInstanceState != null) {
 			restoreInstanceState(savedInstanceState);
 		}
+		
+		_listFeedsFragment = new FeedListFragment();
+		_addFeedFragment = new AddFeedFragment();
 	}
 	
 	@Override
@@ -111,6 +124,14 @@ public class BaseActivity extends Activity implements IBaseView
 		return true;
 	}
 	
+	public Fragment getListFeedsFragment() {
+		return _listFeedsFragment;
+	}
+
+	public Fragment getAddFeedFragment() {
+		return _addFeedFragment;
+	}
+	
 	protected void setHeader(int resourceId) {
 		if(_header != null) {
 			_header.setHeader(resourceId);
@@ -148,18 +169,27 @@ public class BaseActivity extends Activity implements IBaseView
 		}
 	}
 	
+	public void transitionToFragment(Fragment f) {
+		// TODO: Fix!
+		try {
+		    _fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		    _fragmentTransaction.setCustomAnimations(R.anim.view_transition_in_left, R.anim.view_transition_out_left);
+		    _fragmentTransaction.replace(R.id.mainFragement, f);
+		    _fragmentTransaction.commit();
+		} catch(Exception e) {}
+	}
+	
 	public void navigateToAddFeed(View v) {
-		transitionToActivity(AddFeedActivity.class);
+		transitionToFragment(_addFeedFragment);
 	}
 	
 	public void navigateToFeedList(View v) {
-		transitionToActivity(FeedListActivity.class);
+		transitionToFragment(_listFeedsFragment);
 	}
 		
 	public void onError(Exception e)
 	{
 		onError( e, new VoidOperationCallback() {
-
 			@Override
 			protected void onCompleted()
 			{

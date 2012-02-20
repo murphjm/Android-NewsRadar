@@ -1,4 +1,4 @@
-package com.skeletonapp.android;
+package com.skeletonapp.android.fragments;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -20,24 +20,28 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import com.skeletonapp.android.R;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
-public class FeedListActivity extends BaseActivity {
+public class FeedListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.feed_list_activity);
     }
     
     @Override
-    public void onPostCreate(Bundle savedInstanceState) {
-    	super.onPostCreate(savedInstanceState);
-    	setHeader("News Radar");
-    }
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.feed_list_fragment, container, false);
+		return view;
+	}
 }

@@ -4,45 +4,45 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import nl.matshofman.saxrssreader.RssFeed;
-import nl.matshofman.saxrssreader.RssItem;
 import nl.matshofman.saxrssreader.RssReader;
 
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
+
+import com.skeletonapp.android.fragments.AddFeedFragment;
+import com.skeletonapp.android.fragments.FeedListFragment;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
-public class AddFeedActivity extends BaseActivity {
-	EditText txtRSSUrl = null;
-    /** Called when the activity is first created. */
+public class MainActivity extends BaseActivity {
+	EditText _txtRSSUrl = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_feed_activity);
-        txtRSSUrl = (EditText) this.findViewById(R.id.txtRSSUrl);
+        setContentView(R.layout.main_activity);
+        
+        transitionToFragment(getListFeedsFragment());
         
         final Intent intent = getIntent();
         final String action = intent.getAction();
 
         if (Intent.ACTION_VIEW.equals(action)) {
+        	transitionToFragment(getAddFeedFragment());
             String uri = intent.getData().toString();
-            txtRSSUrl.setText(uri);
+            try {
+				fetchRSS(new URL(uri));
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
     
@@ -53,14 +53,19 @@ public class AddFeedActivity extends BaseActivity {
     }
     
     public void fetchRSS(View v) {
-    	showBusyDialog("Fetching feed...");
+    	_txtRSSUrl = (EditText) findViewById(R.id.txtRSSUrl);
+    	
     	URL url = null;
 		try {
-			url = new URL(txtRSSUrl.getText().toString());
+			url = new URL(_txtRSSUrl.getText().toString());
+			fetchRSS(url);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 		}
-		
+    }
+    
+    public void fetchRSS(URL url) {
+    	showBusyDialog("Fetching feed...");
     	new RSSAsyncTask().execute(url);
     }
     
