@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".MainActivity"
+        <activity android:name=".AddFeedActivity"
 			      android:label="@string/app_name">
 
 			<intent-filter>
@@ -64,6 +64,9 @@
 				
             </activity>
         
+        <activity android:name=".FeedListActivity" 
+            android:label="@string/app_name" />
+                    
         <activity android:name=".PagedRSSActivity" 
             android:label="@string/app_name" />
     </application>

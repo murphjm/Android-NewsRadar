@@ -47,10 +47,6 @@ public class BaseActivity extends Activity implements IBaseView
 		}
 	}
 	
-	public void navigateToAddFeed(View v) {
-		setHeader("Pressed!");
-	}
-	
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -150,6 +146,14 @@ public class BaseActivity extends Activity implements IBaseView
 		else {
 			overridePendingTransition(R.anim.view_transition_in_right, R.anim.view_transition_out_right);
 		}
+	}
+	
+	public void navigateToAddFeed(View v) {
+		transitionToActivity(AddFeedActivity.class);
+	}
+	
+	public void navigateToFeedList(View v) {
+		transitionToActivity(FeedListActivity.class);
 	}
 		
 	public void onError(Exception e)

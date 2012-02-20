@@ -25,7 +25,8 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="12dip" 
         android:src="@drawable/btn_plus"
-        android:onClick="navigateToAddFeed"/>
+        android:onClick="navigateToAddFeed"
+        android:padding="8dip"/>
 		
 		<View android:layout_height="fill_parent"
     android:layout_width="2px"
@@ -36,14 +37,16 @@
     android:layout_marginRight="12dip"
     android:id="@+id/seperator1"/>
 		
-				<ImageView
-        android:id="@+id/btnFeedList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/seperator1"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="13dip" 
-        android:src="@drawable/btn_feed"/>
+	<ImageView
+	    android:id="@+id/btnFeedList"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_toLeftOf="@+id/seperator1"
+	    android:layout_centerVertical="true"
+	    android:layout_marginRight="13dip" 
+	    android:src="@drawable/btn_feed"
+	    android:onClick="navigateToFeedList"
+	    android:padding="8dip"/>
 				
 						<View android:layout_height="fill_parent"
     android:layout_width="2px"

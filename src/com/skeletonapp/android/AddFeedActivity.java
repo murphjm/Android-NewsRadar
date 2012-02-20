@@ -28,13 +28,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-public class MainActivity extends BaseActivity {
+public class AddFeedActivity extends BaseActivity {
 	EditText txtRSSUrl = null;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.add_feed_activity);
         txtRSSUrl = (EditText) this.findViewById(R.id.txtRSSUrl);
         
         final Intent intent = getIntent();

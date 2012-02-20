@@ -9,12 +9,8 @@ import com.skeletonapp.android.util.OperationCallbackBase.DispatchType;
 import com.skeletonapp.android.util.Utilities;
 import com.skeletonapp.android.util.VoidOperationCallback;
 import com.viewpagerindicator.CirclePageIndicator;
-import com.viewpagerindicator.PageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -23,7 +19,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 public class PagedRSSActivity extends BaseActivity {
     private ViewPager _viewPager; 
@@ -45,21 +40,6 @@ public class PagedRSSActivity extends BaseActivity {
         if(b != null) {
         	_rssFeed = (RssFeed) b.getSerializable("rss");
         	_rssItems = _rssFeed.getRssItems();
-//        	_rssItems = b.getParcelableArrayList("rss");
-        	VoidOperationCallback adsf = new VoidOperationCallback(DispatchType.MainThread) {
-				
-				@Override
-				protected void onError(Exception error) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				protected void onCompleted() {
-					// TODO Auto-generated method stub
-					
-				}
-			};
         }
         		
         _rssAdapter = new RssPagerAdapter();
@@ -106,6 +86,7 @@ public class PagedRSSActivity extends BaseActivity {
                 WebView wv = new WebView(_context);
                 String pagedContent = "<h2>" + Utilities.encodeHTML(rssItem.getTitle()) + "</h2>";
                 pagedContent += rssItem.getContent().replace("%", "&#37;"); //(!rssItem.getContent().equals("")) ? rssItem.getContent() : rssItem.getDescription();
+                //pagedContent += "<iframe class=\"youtube-player\" type=\"text/html\" width=\"640\" height=\"385\" src=\"http://www.youtube.com/embed/8xgkw67o0Gc\" frameborder=\"0\">";
                 wv.loadData(pagedContent, "text/html", "UTF-8");
                 wv.setHorizontalScrollBarEnabled(false);
                 

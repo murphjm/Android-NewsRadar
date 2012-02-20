@@ -20,7 +20,7 @@ public class SplashActivity extends Activity {
 			@Override
 			public void run() {
 				finish();
-				Intent mainIntent = new Intent().setClass(SplashActivity.this, MainActivity.class);	
+				Intent mainIntent = new Intent().setClass(SplashActivity.this, FeedListActivity.class);	
 				startActivity(mainIntent);
 			}
         	
