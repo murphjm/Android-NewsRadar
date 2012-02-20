@@ -169,7 +169,7 @@ public class BaseActivity extends FragmentActivity implements IBaseView
 		}
 	}
 	
-	public void transitionToFragment(Fragment f) {
+	public void swapFragment(Fragment f) {
 		// TODO: Fix!
 		try {
 		    _fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -180,11 +180,11 @@ public class BaseActivity extends FragmentActivity implements IBaseView
 	}
 	
 	public void navigateToAddFeed(View v) {
-		transitionToFragment(_addFeedFragment);
+		swapFragment(_addFeedFragment);
 	}
 	
 	public void navigateToFeedList(View v) {
-		transitionToFragment(_listFeedsFragment);
+		swapFragment(_listFeedsFragment);
 	}
 		
 	public void onError(Exception e)

@@ -4,7 +4,7 @@
     <string name="hello">Hello World, Skeleton.</string>
     <string name="app_name">News Radar</string>
     <!--  TODO: Fix this isht. -->
-	<integer name="view_transition_duration">500</integer>
+	<integer name="view_transition_duration">250</integer>
 	<string name="busy_dialog_default_message">Busy...</string>
 	
 <style name="ButtonText">

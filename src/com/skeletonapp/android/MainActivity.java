@@ -29,13 +29,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         
-        transitionToFragment(getListFeedsFragment());
+        swapFragment(getListFeedsFragment());
         
         final Intent intent = getIntent();
         final String action = intent.getAction();
 
         if (Intent.ACTION_VIEW.equals(action)) {
-        	transitionToFragment(getAddFeedFragment());
+        	swapFragment(getAddFeedFragment());
             String uri = intent.getData().toString();
             try {
 				fetchRSS(new URL(uri));

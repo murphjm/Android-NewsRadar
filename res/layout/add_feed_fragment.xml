@@ -18,7 +18,7 @@
             android:layout_below="@+id/txtRSSUrl"
             android:background="@drawable/btn_blue"
             android:layout_centerVertical="true"
-            android:text="Read All About It" 
+            android:text="Read All About It!" 
             android:onClick="fetchRSS" />
 
 </RelativeLayout>
