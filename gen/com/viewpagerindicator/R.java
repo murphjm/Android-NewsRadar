@@ -323,12 +323,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btnAddFeed=0x7f050009;
         public static final int btnFeedList=0x7f05000b;
         public static final int btnFetchRSS=0x7f050006;
+        public static final int first=0x7f05000f;
+        public static final int flipper=0x7f05000e;
         public static final int header=0x7f05000d;
         public static final int headerTextView=0x7f050008;
         public static final int horizontal=0x7f050000;
-        public static final int indicator=0x7f050010;
-        public static final int mainFragement=0x7f05000e;
+        public static final int indicator=0x7f050012;
         public static final int none=0x7f050002;
+        public static final int second=0x7f050010;
         public static final int seperator1=0x7f05000a;
         public static final int seperator2=0x7f05000c;
         public static final int triangle=0x7f050003;
@@ -336,7 +338,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int txtView1=0x7f050007;
         public static final int underline=0x7f050004;
         public static final int vertical=0x7f050001;
-        public static final int viewPager=0x7f05000f;
+        public static final int viewPager=0x7f050011;
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f080000;
@@ -346,8 +348,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int view_transition_duration=0x7f080002;
     }
     public static final class layout {
-        public static final int add_feed_fragment=0x7f030000;
-        public static final int feed_list_fragment=0x7f030001;
+        public static final int add_feed_view=0x7f030000;
+        public static final int feed_list_view=0x7f030001;
         public static final int header_layout=0x7f030002;
         public static final int main_activity=0x7f030003;
         public static final int paged_activity=0x7f030004;

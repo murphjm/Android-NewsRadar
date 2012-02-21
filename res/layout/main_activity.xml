@@ -17,10 +17,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         
-		<FrameLayout
-		  android:id="@+id/mainFragement"
-		  android:layout_width="fill_parent"
-		  android:layout_height="fill_parent"/>
+			<ViewSwitcher 
+			    xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/flipper"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
+				<include android:id="@+id/first"  layout="@layout/feed_list_view" />
+				<include android:id="@+id/second"  layout="@layout/add_feed_view" />
+			</ViewSwitcher>
     </RelativeLayout>
 
 </LinearLayout>

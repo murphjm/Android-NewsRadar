@@ -29,14 +29,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         
-        swapFragment(getListFeedsFragment());
-        
         final Intent intent = getIntent();
         final String action = intent.getAction();
 
         if (Intent.ACTION_VIEW.equals(action)) {
-        	swapFragment(getAddFeedFragment());
             String uri = intent.getData().toString();
+            
             try {
 				fetchRSS(new URL(uri));
 			} catch (MalformedURLException e) {

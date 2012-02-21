@@ -3,6 +3,7 @@ package com.skeletonapp.android;
 import java.io.File;
 
 import com.flurry.android.FlurryAgent;
+import com.skeletonapp.android.controls.FixedViewFlipper;
 import com.skeletonapp.android.controls.Header;
 import com.skeletonapp.android.fragments.AddFeedFragment;
 import com.skeletonapp.android.fragments.FeedListFragment;
@@ -20,20 +21,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ViewFlipper;
+import android.widget.ViewSwitcher;
 
 public class BaseActivity extends FragmentActivity implements IBaseView
 {
 	private Header _header;
 	private ProgressDialog _busyDialog;
 	private AlertDialog _alertDialog;
-	private FragmentTransaction _fragmentTransaction;
-
-	private Fragment _listFeedsFragment;
-	private Fragment _addFeedFragment;
+	private ViewSwitcher _flipper;
 	
 	protected boolean isBusyDialogVisible, isNotifyUserVisible, isDisplayErrorVisible;
 	private String busyDialogMessage, notifyUserTitle, notifyUserMessage;
@@ -55,15 +58,19 @@ public class BaseActivity extends FragmentActivity implements IBaseView
 		if(savedInstanceState != null) {
 			restoreInstanceState(savedInstanceState);
 		}
-		
-		_listFeedsFragment = new FeedListFragment();
-		_addFeedFragment = new AddFeedFragment();
 	}
 	
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		this._header = (Header) this.findViewById(R.id.header);
+		_header = (Header) this.findViewById(R.id.header);
+		_flipper = (ViewSwitcher) findViewById(R.id.flipper);
+		
+		// TODO: Fix.
+		if(_flipper != null) {
+			_flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.view_transition_in_left));
+			_flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.view_transition_out_left));
+		}
 	}
 	
 	@Override
@@ -124,14 +131,6 @@ public class BaseActivity extends FragmentActivity implements IBaseView
 		return true;
 	}
 	
-	public Fragment getListFeedsFragment() {
-		return _listFeedsFragment;
-	}
-
-	public Fragment getAddFeedFragment() {
-		return _addFeedFragment;
-	}
-	
 	protected void setHeader(int resourceId) {
 		if(_header != null) {
 			_header.setHeader(resourceId);
@@ -169,22 +168,15 @@ public class BaseActivity extends FragmentActivity implements IBaseView
 		}
 	}
 	
-	public void swapFragment(Fragment f) {
-		// TODO: Fix!
-		try {
-		    _fragmentTransaction = getSupportFragmentManager().beginTransaction();
-		    _fragmentTransaction.setCustomAnimations(R.anim.view_transition_in_left, R.anim.view_transition_out_left);
-		    _fragmentTransaction.replace(R.id.mainFragement, f);
-		    _fragmentTransaction.commit();
-		} catch(Exception e) {}
-	}
-	
+	// TODO: HACK, fix this shit. 
 	public void navigateToAddFeed(View v) {
-		swapFragment(_addFeedFragment);
+		if(_flipper.getDisplayedChild() == 0)
+			_flipper.showNext();
 	}
 	
 	public void navigateToFeedList(View v) {
-		swapFragment(_listFeedsFragment);
+		if(_flipper.getDisplayedChild() == 1)
+			_flipper.showPrevious();
 	}
 		
 	public void onError(Exception e)
