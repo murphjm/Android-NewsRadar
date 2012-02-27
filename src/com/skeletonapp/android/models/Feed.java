@@ -1,14 +1,15 @@
 package com.skeletonapp.android.models;
 
 import java.util.Date;
-import nl.matshofman.saxrssreader.RssFeed;
+
+import com.skeletonapp.android.rss.RssFeed;
 
 public class Feed {
 	private long _id;
 	private String _feedName;
 	private String _feedUrl;
 	private Date _feedDate;
-	private RssFeed _feedData;
+	private String _feedData;
 	
 	public long getId() {
 		return _id;
@@ -26,7 +27,7 @@ public class Feed {
 		return _feedDate;
 	}
 	
-	public RssFeed getFeedData() {
+	public String getFeedData() {
 		return _feedData;
 	}
 	
@@ -46,7 +47,7 @@ public class Feed {
 		this._feedDate = _feedDate;
 	}
 	
-	public void setFeedData(RssFeed _feedData) {
+	public void setFeedData(String _feedData) {
 		this._feedData = _feedData;
 	}
 	

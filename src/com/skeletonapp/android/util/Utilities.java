@@ -1,11 +1,14 @@
 package com.skeletonapp.android.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
@@ -18,9 +21,10 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.List;
 
-import nl.matshofman.saxrssreader.RssFeed;
 
 import org.acra.util.Base64;
+
+import com.skeletonapp.android.rss.RssFeed;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -82,40 +86,6 @@ public class Utilities
 	}
 
 	/**
-	 * 
-	 * @param stream
-	 * @return
-	 * @throws IOException
-	 * @deprecated Use {@link Utilities#readStreamFully(InputStream)} instead
-	 */
-	@Deprecated
-	public static String ReadStreamToEnd(InputStream stream) throws IOException
-	{
-		int read = 0;
-		char[] buffer = new char[8000];
-		StringBuffer stringBuffer = new StringBuffer();
-		InputStreamReader reader = new InputStreamReader(stream);
-
-		try
-		{
-			while (read != -1)
-			{
-				read = reader.read(buffer, 0, buffer.length);
-				if (read > 0)
-				{
-					stringBuffer.append(buffer, 0, read);
-				}
-			}
-		}
-		finally
-		{
-			reader.close();
-		}
-
-		return stringBuffer.toString();
-	}
-
-	/**
 	 * Reads the entire stream without double-buffering and returns its
 	 * {@link String} representation. Note this method will not clean up the
 	 * input stream when finished.
@@ -125,7 +95,7 @@ public class Utilities
 	 * @return The fully read {@link String}
 	 * @throws IOException
 	 *             If the underlying {@link InputStreamReader} does
-	 * @author Jeff Mixon
+	 * @author Justin Schultz
 	 */
 	public static String readStreamFully(InputStream stream) throws IOException
 	{
@@ -320,7 +290,6 @@ public class Utilities
             byte[] decodedKey = Base64.decode(encodedPublicKey,0);
             KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
             return keyFactory.generatePublic(new X509EncodedKeySpec(decodedKey));
-
     }
 	
     /**
@@ -451,16 +420,5 @@ public class Utilities
 			}
 
 		}
-	}
-	
-	public static byte[] convertRssFeedToByteStream(RssFeed feedData) {
-		ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-		
-		try {
-			ObjectOutputStream oStream = new ObjectOutputStream(bStream);
-			oStream.writeObject(feedData);
-		} catch(Exception e) { }
-		
-		return bStream.toByteArray();
 	}
 }

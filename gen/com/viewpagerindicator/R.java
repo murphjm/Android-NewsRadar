@@ -343,8 +343,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f080000;
         public static final int default_title_indicator_footer_indicator_style=0x7f080001;
-        /**   TODO: Fix this isht. 
-         */
         public static final int view_transition_duration=0x7f080002;
     }
     public static final class layout {

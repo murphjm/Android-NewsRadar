@@ -2,8 +2,6 @@ package com.skeletonapp.android;
 
 import java.util.ArrayList;
 
-import nl.matshofman.saxrssreader.RssFeed;
-import nl.matshofman.saxrssreader.RssItem;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -14,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 
+import com.skeletonapp.android.rss.RssFeed;
+import com.skeletonapp.android.rss.RssItem;
 import com.skeletonapp.android.util.Utilities;
 import com.viewpagerindicator.CirclePageIndicator;
 

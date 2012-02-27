@@ -26,7 +26,7 @@ public class SimpleRSSSQLiteHelper extends SQLiteOpenHelper {
 	//	feed_data blob not null);
 	
 	// Database creation sql statement
-	private static final String DATABASE_CREATE = String.format("CREATE TABLE %s (%s integer primary key autoincrement, %s text not null, %s text not null, %s text not null, %s blob not null);", TABLE_FEEDS, COLUMN_ID, COLUMN_FEED_NAME, COLUMN_FEED_URL, COLUMN_FEED_DATE, COLUMN_FEED_DATA);
+	private static final String DATABASE_CREATE = String.format("CREATE TABLE %s (%s integer primary key autoincrement, %s text not null, %s text not null, %s text not null, %s text not null);", TABLE_FEEDS, COLUMN_ID, COLUMN_FEED_NAME, COLUMN_FEED_URL, COLUMN_FEED_DATE, COLUMN_FEED_DATA);
 
 	public SimpleRSSSQLiteHelper(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);
