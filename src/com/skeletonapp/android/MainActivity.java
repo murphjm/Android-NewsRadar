@@ -1,26 +1,15 @@
 package com.skeletonapp.android;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import nl.matshofman.saxrssreader.RssFeed;
 import nl.matshofman.saxrssreader.RssReader;
-
-import org.xml.sax.SAXException;
-
-import com.skeletonapp.android.fragments.AddFeedFragment;
-import com.skeletonapp.android.fragments.FeedListFragment;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
 public class MainActivity extends BaseActivity {
 	EditText _txtRSSUrl = null;
@@ -38,8 +27,7 @@ public class MainActivity extends BaseActivity {
             try {
 				fetchRSS(new URL(uri));
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// Swallow the exception
 			}
         }
     }
@@ -47,7 +35,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
     	super.onPostCreate(savedInstanceState);
-    	setHeader("News Radar");
+    	setHeader("SimpleRSS");
     }
     
     public void fetchRSS(View v) {
@@ -58,7 +46,7 @@ public class MainActivity extends BaseActivity {
 			url = new URL(_txtRSSUrl.getText().toString());
 			fetchRSS(url);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+			// Swallow the exception here
 		}
     }
     
@@ -68,16 +56,15 @@ public class MainActivity extends BaseActivity {
     }
     
     public class RSSAsyncTask extends AsyncTask<URL, Void, RssFeed> { 
-
+    	Throwable t = null;
+    	// TODO: Database insert / lookup
     	@Override
     	protected RssFeed doInBackground(URL... url) {
     		RssFeed feed = null;
     		try {
 				feed = RssReader.read(url[0]);
-			} catch (SAXException e) {
-				
-			} catch (IOException e) {
-				
+			} catch (Exception e) {
+				t = e;
 			}
     		
     		return feed;
@@ -85,10 +72,12 @@ public class MainActivity extends BaseActivity {
     	
     	@Override
         protected void onPostExecute(RssFeed result) {
+    		// TODO: Something with T
+    		dismissBusyDialog();
+    		
     		if(result != null) {
-    			dismissBusyDialog();
                 Bundle b = new Bundle();
-                b.putSerializable("rss", (Serializable) result);
+                b.putSerializable("rss", result);
                 transitionToActivity(PagedRSSActivity.class, b);
     		}
         }

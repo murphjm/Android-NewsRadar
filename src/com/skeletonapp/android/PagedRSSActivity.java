@@ -4,12 +4,6 @@ import java.util.ArrayList;
 
 import nl.matshofman.saxrssreader.RssFeed;
 import nl.matshofman.saxrssreader.RssItem;
-
-import com.skeletonapp.android.util.OperationCallbackBase.DispatchType;
-import com.skeletonapp.android.util.Utilities;
-import com.skeletonapp.android.util.VoidOperationCallback;
-import com.viewpagerindicator.CirclePageIndicator;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -19,6 +13,9 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
+
+import com.skeletonapp.android.util.Utilities;
+import com.viewpagerindicator.CirclePageIndicator;
 
 public class PagedRSSActivity extends BaseActivity {
     private ViewPager _viewPager; 
@@ -98,7 +95,7 @@ public class PagedRSSActivity extends BaseActivity {
                 webSettings.setBuiltInZoomControls(false);
                 webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
                 
-                ((ViewPager) collection).addView((View)wv,0);
+                ((ViewPager) collection).addView(wv,0);
                 return wv;
         }
 

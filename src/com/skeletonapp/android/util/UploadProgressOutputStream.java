@@ -17,6 +17,7 @@ public class UploadProgressOutputStream extends FilterOutputStream {
 		this.listener = listener;
 	}
 	
+	@Override
 	public void write(byte[] b, int position, int bytesToSend) throws IOException {
 		int bytesToWrite = 0, bytesWritten = 0;
 		
@@ -31,7 +32,8 @@ public class UploadProgressOutputStream extends FilterOutputStream {
 		}
     }
 
-    public void write(int b) throws IOException {
+    @Override
+	public void write(int b) throws IOException {
         out.write(b);
         this.transferred++;
         notifyProgress();

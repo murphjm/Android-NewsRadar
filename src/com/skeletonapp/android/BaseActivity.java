@@ -2,36 +2,25 @@ package com.skeletonapp.android;
 
 import java.io.File;
 
-import com.flurry.android.FlurryAgent;
-import com.skeletonapp.android.controls.FixedViewFlipper;
-import com.skeletonapp.android.controls.Header;
-import com.skeletonapp.android.fragments.AddFeedFragment;
-import com.skeletonapp.android.fragments.FeedListFragment;
-import com.skeletonapp.android.util.OperationCallback;
-import com.skeletonapp.android.util.Utilities;
-import com.skeletonapp.android.util.VoidOperationCallback;
-import com.skeletonapp.views.IBaseView;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 
-public class BaseActivity extends FragmentActivity implements IBaseView
+import com.skeletonapp.android.controls.Header;
+import com.skeletonapp.android.util.OperationCallback;
+import com.skeletonapp.android.util.Utilities;
+import com.skeletonapp.android.util.VoidOperationCallback;
+
+public class BaseActivity extends FragmentActivity
 {
 	private Header _header;
 	private ProgressDialog _busyDialog;

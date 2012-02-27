@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -16,6 +17,8 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.List;
+
+import nl.matshofman.saxrssreader.RssFeed;
 
 import org.acra.util.Base64;
 
@@ -448,5 +451,16 @@ public class Utilities
 			}
 
 		}
+	}
+	
+	public static byte[] convertRssFeedToByteStream(RssFeed feedData) {
+		ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+		
+		try {
+			ObjectOutputStream oStream = new ObjectOutputStream(bStream);
+			oStream.writeObject(feedData);
+		} catch(Exception e) { }
+		
+		return bStream.toByteArray();
 	}
 }

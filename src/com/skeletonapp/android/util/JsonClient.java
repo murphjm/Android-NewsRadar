@@ -11,6 +11,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 
 import android.util.Log;
+
 import com.google.gson.Gson;
 
 public class JsonClient
